@@ -2,20 +2,20 @@ import React, { useRef, useEffect, useState } from 'react';
 import { Play, Pause, SkipForward, SkipBack, Volume2 } from 'lucide-react';
 
 const tracks = [
-  { id: 1, title: 'Digital Bath (Tribute)', album: 'White Pony Tribute', duration: '4:15' },
-  { id: 2, title: 'Change (In the House of Flies)', album: 'White Pony Tribute', duration: '5:01' },
-  { id: 3, title: 'Be Quiet and Drive (Far Away)', album: 'Around the Fur Tribute', duration: '4:33' },
-  { id: 4, title: 'My Own Summer (Shove It)', album: 'Around the Fur Tribute', duration: '3:35' },
-  { id: 5, title: 'Sextape', album: 'Diamond Eyes Tribute', duration: '4:01' },
-  { id: 6, title: 'Diamond Eyes', album: 'Diamond Eyes Tribute', duration: '3:08' },
-  { id: 7, title: 'Knife Prty', album: 'White Pony Tribute', duration: '4:49' },
-  { id: 8, title: 'Passenger', album: 'White Pony Tribute', duration: '6:08' },
-  { id: 9, title: 'Minerva', album: 'Deftones Tribute', duration: '4:17' },
-  { id: 10, title: 'Hexagram', album: 'Deftones Tribute', duration: '4:09' },
-  { id: 11, title: 'Cherry Waves', album: 'Saturday Night Wrist Tribute', duration: '5:17' },
-  { id: 12, title: 'Hole in the Earth', album: 'Saturday Night Wrist Tribute', duration: '4:09' },
-  { id: 13, title: 'Rocket Skates', album: 'Diamond Eyes Tribute', duration: '4:14' },
-  { id: 14, title: 'You\'ve Seen the Butcher', album: 'Diamond Eyes Tribute', duration: '3:31' }
+  { id: 1, title: 'Be Quiet And Drive (Far Away)', album: 'Around The Fur', duration: '5:00' },
+  { id: 2, title: 'Shovit (My Own Summer)', album: 'Around The Fur', duration: '3:35' },
+  { id: 3, title: 'Change (In the House of Flies)', album: 'White Pony', duration: '5:00' },
+  { id: 4, title: 'Bored', album: 'Adrenaline', duration: '4:06' },
+  { id: 5, title: 'Digital Bath', album: 'White Pony', duration: '4:16' },
+  { id: 6, title: 'Back To School', album: 'WHite Pony', duration: '3:58' },
+  { id: 7, title: 'Root', album: 'Adrenaline', duration: '3:41' },
+  { id: 8, title: 'Around The fur', album: 'Around The fur', duration: '3:32' },
+  { id: 9, title: 'Headup', album: 'Around The fur', duration: '6:13' },
+  { id: 10, title: '976 Evil', album: 'Diamond Eyes', duration: '4:33' },
+  { id: 11, title: 'Beware', album: 'Saturday Night Wrist', duration: '6:01' },
+  { id: 12, title: 'Bloody Cape', album: 'Deftones', duration: '3:36' },
+  { id: 13, title: 'Engine No. 9', album: 'Adrenaline', duration: '3:25' },
+  { id: 14, title: 'Kimdracula', album: 'Saturday Night Wrist', duration: '3:15' }
 ];
 
 const Music: React.FC = () => {
@@ -68,7 +68,7 @@ const Music: React.FC = () => {
         <h2 className={`text-3xl md:text-4xl font-bold mb-16 text-white text-center transition-all duration-1000 ${
           isVisible ? 'opacity-100' : 'opacity-0 translate-y-8'
         }`}>
-          OUR <span className="text-red-600">MUSIC</span>
+          SET <span className="text-red-600">LIST</span>
         </h2>
 
         <div className={`bg-zinc-800/80 backdrop-blur-sm rounded-md overflow-hidden shadow-xl max-w-4xl mx-auto transition-all duration-1000 ${
@@ -144,10 +144,10 @@ const Music: React.FC = () => {
           isVisible ? 'opacity-100' : 'opacity-0'
         }`}>
           <a 
-            href="#" 
+            href="https://music.youtube.com/channel/UCXQtyZ6gWbOYR5B8Sc2sr3g" 
             className="inline-block border-2 border-red-600 text-red-600 py-3 px-8 rounded-sm font-bold hover:bg-red-600 hover:text-white transition-colors duration-300"
           >
-            LISTEN ON SPOTIFY
+            MAS DEFTONES EN YT
           </a>
         </div>
       </div>

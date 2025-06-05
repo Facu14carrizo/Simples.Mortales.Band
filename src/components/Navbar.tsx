@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const navLinks = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
+  { name: 'Inicio', href: '#home' },
+  { name: 'Nosotros', href: '#about' },
   { name: 'Band', href: '#band' },
   { name: 'Music', href: '#music' },
   { name: 'Shows', href: '#shows' },
   { name: 'Gallery', href: '#gallery' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Contacto', href: '#contact' },
+  { name: '3D Viewer', href: '/viewer-3d' },
 ];
 
 const Navbar: React.FC = () => {
@@ -41,23 +43,33 @@ const Navbar: React.FC = () => {
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex justify-between items-center">
-          <a 
-            href="#home" 
+          <Link 
+            to="/" 
             className="text-white font-extrabold text-xl md:text-2xl tracking-wider"
           >
             TRIBUTO A DEFTONES
-          </a>
+          </Link>
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-6">
             {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-gray-300 hover:text-red-500 transition-colors duration-300 font-medium tracking-wide"
-              >
-                {link.name}
-              </a>
+              link.href.startsWith('#') ? (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="text-gray-300 hover:text-red-500 transition-colors duration-300 font-medium tracking-wide"
+                >
+                  {link.name}
+                </a>
+              ) : (
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  className="text-gray-300 hover:text-red-500 transition-colors duration-300 font-medium tracking-wide"
+                >
+                  {link.name}
+                </Link>
+              )
             ))}
           </div>
           
@@ -82,14 +94,25 @@ const Navbar: React.FC = () => {
         <div className="container mx-auto px-4">
           <div className="flex flex-col space-y-4">
             {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="text-gray-300 hover:text-red-500 transition-colors py-2 border-b border-gray-800 font-medium tracking-wide"
-              >
-                {link.name}
-              </a>
+              link.href.startsWith('#') ? (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className="text-gray-300 hover:text-red-500 transition-colors py-2 border-b border-gray-800 font-medium tracking-wide"
+                >
+                  {link.name}
+                </a>
+              ) : (
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className="text-gray-300 hover:text-red-500 transition-colors py-2 border-b border-gray-800 font-medium tracking-wide"
+                >
+                  {link.name}
+                </Link>
+              )
             ))}
           </div>
         </div>

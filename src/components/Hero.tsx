@@ -14,10 +14,10 @@ const Hero: React.FC = () => {
       className="h-screen relative flex items-center justify-center bg-gradient-to-b from-black via-gray-900 to-black overflow-hidden"
     >
       {/* Background texture */}
-      <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/65677/pexels-photo-65677.jpeg')] bg-cover bg-center opacity-20 mix-blend-overlay"></div>
+      <div className="absolute inset-0 bg-[url('https://cdn.wallpapersafari.com/2/15/bpKVyB.jpg')] bg-cover bg-center opacity-100 mix-blend-overlay"></div>
       
       {/* Animated noise overlay */}
-      <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/5709661/pexels-photo-5709661.jpeg')] bg-cover opacity-10 mix-blend-overlay"></div>
+      <div className="absolute inset-0 bg-[url('https://cdn.wallpapersafari.com/2/15/bpKVyB.jpg')] bg-cover opacity-80 mix-blend-overlay"></div>
       
       <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
         <h1 
@@ -33,7 +33,7 @@ const Hero: React.FC = () => {
             loaded ? 'transform-none opacity-100' : 'translate-y-10 opacity-0'
           }`}
         >
-          Unleashing the raw power and emotion of Deftones through our tribute performances
+          Liberando el poder puro y los screamers de Deftones a través de nuestras presentaciones tributo
         </p>
         
         <div 
@@ -45,13 +45,13 @@ const Hero: React.FC = () => {
             href="#music" 
             className="inline-block bg-red-600 text-white py-3 px-8 rounded-sm font-bold tracking-wide hover:bg-red-700 transition-colors duration-300 mx-2 my-2"
           >
-            LISTEN NOW
+            CANCIONES
           </a>
           <a 
             href="#shows" 
             className="inline-block bg-transparent text-white border-2 border-white py-3 px-8 rounded-sm font-bold tracking-wide hover:bg-white/10 transition-colors duration-300 mx-2 my-2"
           >
-            UPCOMING SHOWS
+            PROXIMOS SHOWS
           </a>
         </div>
       </div>

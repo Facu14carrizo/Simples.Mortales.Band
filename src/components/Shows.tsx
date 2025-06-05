@@ -4,81 +4,81 @@ import { Calendar } from 'lucide-react';
 const allShows = [
   {
     id: 10,
-    date: 'DEC 23, 2025',
-    venue: 'Rock Temple',
-    location: 'Mexico City, MX',
+    date: 'PROXIMAMENTE',
+    venue: '...',
+    location: '???',
     ticketLink: '#',
     isSoldOut: false
   },
   {
     id: 9,
-    date: 'DEC 17, 2025',
-    venue: 'Metal Factory',
-    location: 'Toluca, MX',
+    date: 'MAY 10, 2025',
+    venue: 'Liverpool Club',
+    location: 'Palermo',
     ticketLink: '#',
     isSoldOut: true
   },
   {
     id: 8,
-    date: 'DEC 10, 2025',
-    venue: 'The Basement',
-    location: 'Querétaro, MX',
+    date: 'ABR 05, 2025',
+    venue: 'Six Bar',
+    location: 'San Miguel',
     ticketLink: '#',
     isSoldOut: true
   },
   {
     id: 7,
-    date: 'DEC 03, 2025',
-    venue: 'Rock Arena',
-    location: 'Mérida, MX',
+    date: 'ABR 01, 2025',
+    venue: 'La Casa Del Rock',
+    location: 'San Miguel',
     ticketLink: '#',
     isSoldOut: true
   },
   {
     id: 6,
-    date: 'NOV 26, 2025',
-    venue: 'Metal House',
-    location: 'Cancún, MX',
+    date: 'MAR 07, 2025',
+    venue: 'Sangre Negra',
+    location: 'Pilar',
     ticketLink: '#',
     isSoldOut: true
   },
   {
     id: 5,
-    date: 'NOV 19, 2025',
-    venue: 'The Pit',
-    location: 'Tijuana, MX',
+    date: 'FEB 22, 2025',
+    venue: 'TERRAZAS',
+    location: 'Pacheco',
     ticketLink: '#',
     isSoldOut: true
   },
   {
     id: 4,
-    date: 'NOV 12, 2025',
-    venue: 'Dystopia',
-    location: 'Puebla, MX',
+    date: 'FEB 15, 2025',
+    venue: 'Six Bar',
+    location: 'San Miguel',
     ticketLink: '#',
     isSoldOut: true
   },
   {
     id: 3,
-    date: 'NOV 05, 2025',
-    venue: 'Heavy Metal Club',
-    location: 'Guadalajara, MX',
+    date: 'DIC 14, 2024',
+    venue: 'Sangre Negra',
+    location: 'Pilar',
     ticketLink: '#',
     isSoldOut: true
   },
   {
     id: 2,
-    date: 'OCT 22, 2025',
-    venue: 'Rock & Roll Hotel',
-    location: 'Monterrey, MX',
+    date: 'SEP 13, 2024',
+    venue: 'Sangre Negra',
+    location: 'Pilar',
     ticketLink: '#',
     isSoldOut: true
   },
   {
     id: 1,
-    date: 'OCT 15, 2025',
-    venue: 'The Underground',
-    location: 'Mexico City, MX',
+    date: 'JUN 21, 2024',
+    venue: 'Sangre Negra',
+    location: 'Pilar',
     ticketLink: '#',
     isSoldOut: true
   }
@@ -135,7 +135,7 @@ const Shows: React.FC = () => {
         <h2 className={`text-3xl md:text-4xl font-bold mb-16 text-white text-center transition-all duration-1000 ${
           isVisible ? 'opacity-100' : 'opacity-0 translate-y-8'
         }`}>
-          UPCOMING <span className="text-red-600">SHOWS</span>
+          PROXIMOS <span className="text-red-600">SHOWS</span>
         </h2>
 
         <div className="max-w-4xl mx-auto space-y-6">
@@ -190,7 +190,7 @@ const Shows: React.FC = () => {
               onClick={handleLoadMore}
               className="inline-block bg-transparent hover:bg-red-600 text-red-600 hover:text-white border-2 border-red-600 py-3 px-8 rounded-sm font-bold text-sm transition-colors duration-300 mx-2"
             >
-              LOAD MORE SHOWS
+              MAS SHOWS
             </button>
           )}
           <div>
@@ -198,7 +198,7 @@ const Shows: React.FC = () => {
               href="#contact" 
               className="inline-block bg-red-600 text-white py-3 px-8 rounded-sm font-bold tracking-wide hover:bg-red-700 transition-colors"
             >
-              BOOK US FOR A SHOW
+              CONTACTANOS PARA AGENDAR UNA FECHA
             </a>
           </div>
         </div>

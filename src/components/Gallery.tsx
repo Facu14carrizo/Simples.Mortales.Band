@@ -4,33 +4,33 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 const galleryImages = [
   {
     id: 1,
-    src: 'https://images.pexels.com/photos/164693/pexels-photo-164693.jpeg',
+    src: 'src/resources/imgs/gallery/1.jpeg',
     alt: 'Live concert performance'
   },
   {
     id: 2,
-    src: 'https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg',
+    src: 'src/resources/imgs/gallery/3.jpeg',
     alt: 'Band performing on stage'
   },
   {
     id: 3,
-    src: 'https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg',
+    src: 'src/resources/imgs/gallery/4.jpeg',
     alt: 'Drummer in action'
   },
   {
     id: 4,
-    src: 'https://images.pexels.com/photos/167636/pexels-photo-167636.jpeg',
+    src: 'src/resources/imgs/gallery/5.jpeg',
     alt: 'Concert atmosphere'
   },
   {
     id: 5,
-    src: 'https://images.pexels.com/photos/1540406/pexels-photo-1540406.jpeg',
+    src: 'src/resources/imgs/gallery/6.jpeg',
     alt: 'Crowd at a rock concert'
   },
   {
     id: 6,
-    src: 'https://images.pexels.com/photos/2263436/pexels-photo-2263436.jpeg',
-    alt: 'Band backstage'
+    src: 'src/resources/imgs/gallery/7.jpeg',
+    alt: 'Heavy is the crown'
   }
 ];
 
@@ -120,6 +120,7 @@ const Gallery: React.FC = () => {
             {galleryImages.map((image, index) => (
               <div 
                 key={image.id}
+                /* Resolucion de la Galeria */
                 className="flex-shrink-0 w-[280px] md:w-[380px] group cursor-pointer overflow-hidden rounded-sm"
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
@@ -147,7 +148,7 @@ const Gallery: React.FC = () => {
             href="#" 
             className="inline-block border-2 border-white text-white py-3 px-8 rounded-sm font-bold hover:bg-white/10 transition-colors"
           >
-            VIEW FULL GALLERY
+            VIEW FULL ART
           </a>
         </div>
       </div>

@@ -37,7 +37,7 @@ const About: React.FC = () => {
           <h2 className={`text-3xl md:text-4xl font-bold mb-12 text-white text-center transition-all duration-1000 ${
             isVisible ? 'opacity-100' : 'opacity-0 translate-y-8'
           }`}>
-            ABOUT <span className="text-red-600">US</span>
+            UN POCO <span className="text-red-600">DE NOSOTROS</span>
           </h2>
           
           <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -47,9 +47,9 @@ const About: React.FC = () => {
               <div className="relative">
                 <div className="aspect-w-4 aspect-h-3 overflow-hidden">
                   <img 
-                    src="https://images.pexels.com/photos/2955033/pexels-photo-2955033.jpeg" 
+                    src="src/resources/imgs/banda.jpg" 
                     alt="Band performing live" 
-                    className="object-cover w-full h-full rounded-sm shadow-2xl"
+                    className="object-cover w-full h-full rounded-xl shadow-2xl"
                   />
                 </div>
                 <div className="absolute -bottom-4 -right-4 h-full w-full border-2 border-red-600 rounded-sm -z-10"></div>
@@ -60,18 +60,20 @@ const About: React.FC = () => {
               isVisible ? 'opacity-100' : 'opacity-0 translate-x-8'
             }`}>
               <p className="text-gray-300 leading-relaxed">
-                <span className="text-red-600 font-bold">Simples Mortales</span> emerged from a shared passion for the 
-                unique sound and artistic vision of Deftones. Founded in 2020, our tribute band aims to capture the 
-                essence of their music while adding our own interpretation.
+                <span className="text-red-600 font-bold">Simples Mortales</span> Surgió de una 
+                pasión compartida por el sonido único y la visión artística de Deftones. 
+                Fundada en 2023, nuestra banda tributo tiene como objetivo capturar la esencia de su música y 
+                al mismo tiempo agregar nuestra propia interpretación.
               </p>
               <p className="text-gray-300 leading-relaxed">
-                We dive deep into the atmospheric textures, dynamic shifts, and emotional intensity that define 
-                Deftones' distinctive sound. From the raw aggression of "Adrenaline" to the ethereal landscapes 
-                of "Koi No Yokan," we strive to deliver an authentic and powerful experience.
+              Nos sumergimos profundamente en las texturas atmosféricas, los cambios dinámicos y la intensidad 
+              emocional que definen el sonido distintivo de Deftones. Desde la cruda agresión de "Adrenaline" 
+              hasta los paisajes etéreos invasivos de "White Pony", nos esforzamos por ofrecer una experiencia auténtica y poderosa.
               </p>
               <p className="text-gray-300 leading-relaxed">
-                Our performances are more than just covers—they're a celebration of a band that has pushed the 
-                boundaries of metal and alternative music for decades, influencing countless artists along the way.
+              Nuestras presentaciones son más que simples versiones: son una celebración de una banda que ha traspasado 
+              los límites del metal y la música alternativa durante décadas, influyendo en innumerables artistas a lo 
+              largo del camino.
               </p>
             </div>
           </div>

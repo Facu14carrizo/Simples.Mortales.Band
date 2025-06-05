@@ -67,7 +67,7 @@ const Contact: React.FC = () => {
         <h2 className={`text-3xl md:text-4xl font-bold mb-16 text-white text-center transition-all duration-1000 ${
           isVisible ? 'opacity-100' : 'opacity-0 translate-y-8'
         }`}>
-          GET IN <span className="text-red-600">TOUCH</span>
+          HABLÁ CON <span className="text-red-600">NOSOTROS</span>
         </h2>
 
         <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
@@ -80,8 +80,8 @@ const Contact: React.FC = () => {
               <div className="flex items-start space-x-4">
                 <Mail className="text-red-600 mt-1 flex-shrink-0" size={20} />
                 <div>
-                  <h4 className="text-white font-medium">Email</h4>
-                  <p className="text-gray-400">info@simplesmortales.com</p>
+                  <h4 className="text-white font-medium">Instagram</h4>
+                  <p className="text-gray-400">simples.mortales.band</p>
                 </div>
               </div>
               
@@ -89,7 +89,7 @@ const Contact: React.FC = () => {
                 <Phone className="text-red-600 mt-1 flex-shrink-0" size={20} />
                 <div>
                   <h4 className="text-white font-medium">Phone</h4>
-                  <p className="text-gray-400">+52 555 123 4567</p>
+                  <p className="text-gray-400">+54 9 11 6370-4522</p>
                 </div>
               </div>
               
@@ -97,21 +97,21 @@ const Contact: React.FC = () => {
                 <MapPin className="text-red-600 mt-1 flex-shrink-0" size={20} />
                 <div>
                   <h4 className="text-white font-medium">Location</h4>
-                  <p className="text-gray-400">Mexico City, Mexico</p>
+                  <p className="text-gray-400">Buenos Aires, Argentina</p>
                 </div>
               </div>
             </div>
             
-            <h3 className="text-2xl font-bold text-white mt-12 mb-6">Follow Us</h3>
+            <h3 className="text-2xl font-bold text-white mt-12 mb-6">Seguinos</h3>
             
             <div className="flex space-x-4">
-              <a href="#" className="bg-zinc-800 hover:bg-red-600 text-white p-3 rounded-full transition-colors duration-300">
+              <a href="https://www.instagram.com/simples.mortales.band?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" className="bg-zinc-800 hover:bg-red-600 text-white p-3 rounded-full transition-colors duration-300">
                 <Instagram size={20} />
               </a>
               <a href="#" className="bg-zinc-800 hover:bg-red-600 text-white p-3 rounded-full transition-colors duration-300">
                 <Facebook size={20} />
               </a>
-              <a href="#" className="bg-zinc-800 hover:bg-red-600 text-white p-3 rounded-full transition-colors duration-300">
+              <a href="https://www.youtube.com/@SimplesMortales-g1e/videos" className="bg-zinc-800 hover:bg-red-600 text-white p-3 rounded-full transition-colors duration-300">
                 <Youtube size={20} />
               </a>
             </div>
@@ -120,11 +120,11 @@ const Contact: React.FC = () => {
           <div className={`transition-all duration-1000 delay-300 ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
           }`}>
-            <h3 className="text-2xl font-bold text-white mb-6">Send a Message</h3>
+            <h3 className="text-2xl font-bold text-white mb-6">Escribinos</h3>
             
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label htmlFor="name" className="text-gray-300 mb-1 block">Name</label>
+                <label htmlFor="name" className="text-gray-300 mb-1 block">Nombre</label>
                 <input 
                   type="text" 
                   id="name"
@@ -137,7 +137,7 @@ const Contact: React.FC = () => {
               </div>
               
               <div>
-                <label htmlFor="email" className="text-gray-300 mb-1 block">Email</label>
+                <label htmlFor="email" className="text-gray-300 mb-1 block">Mail</label>
                 <input 
                   type="email" 
                   id="email"
@@ -150,7 +150,7 @@ const Contact: React.FC = () => {
               </div>
               
               <div>
-                <label htmlFor="subject" className="text-gray-300 mb-1 block">Subject</label>
+                <label htmlFor="subject" className="text-gray-300 mb-1 block">Asunto</label>
                 <input 
                   type="text" 
                   id="subject"
@@ -163,7 +163,7 @@ const Contact: React.FC = () => {
               </div>
               
               <div>
-                <label htmlFor="message" className="text-gray-300 mb-1 block">Message</label>
+                <label htmlFor="message" className="text-gray-300 mb-1 block">Mensaje</label>
                 <textarea 
                   id="message"
                   name="message"
@@ -179,7 +179,7 @@ const Contact: React.FC = () => {
                 type="submit"
                 className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-sm transition-colors duration-300 w-full md:w-auto"
               >
-                SEND MESSAGE
+                ENVIAR
               </button>
             </form>
           </div>

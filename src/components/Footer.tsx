@@ -33,7 +33,7 @@ const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="text-zinc-400 hover:text-red-500 transition-colors">
+                <a href="https://github.com/Facu14carrizo" className="text-zinc-400 hover:text-red-500 transition-colors">
                   Credits
                 </a>
               </li>
