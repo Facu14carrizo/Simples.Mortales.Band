@@ -73,26 +73,22 @@ const Navbar: React.FC = () => {
             fpsLimit: 60,
             particles: {
               color: {
-                value: ["#ff0000", "#ff3333", "#ff6666"],
+                value: "#ff0000",
               },
               links: {
                 color: "#ff0000",
                 distance: 150,
                 enable: true,
-                opacity: 0.4,
+                opacity: 0.2,
                 width: 1,
               },
-              collisions: {
-                enable: true,
-              },
               move: {
-                direction: "none",
                 enable: true,
                 outModes: {
                   default: "bounce",
                 },
                 random: true,
-                speed: 2,
+                speed: 1,
                 straight: false,
               },
               number: {
@@ -100,46 +96,35 @@ const Navbar: React.FC = () => {
                   enable: true,
                   area: 800,
                 },
-                value: 40,
+                value: 20,
               },
               opacity: {
-                value: 0.5,
-                animation: {
-                  enable: true,
-                  speed: 1,
-                  minimumValue: 0.1,
-                },
+                value: 0.3,
               },
               shape: {
-                type: ["circle", "triangle"],
+                type: "circle",
               },
               size: {
-                value: { min: 1, max: 5 },
-                animation: {
-                  enable: true,
-                  speed: 2,
-                  minimumValue: 0.1,
-                },
+                value: { min: 1, max: 3 },
               },
             },
             detectRetina: true,
           }}
         />
         <div 
-          className="absolute inset-0 bg-gradient-to-r from-black via-red-900/30 to-black opacity-90"
+          className="absolute inset-0 bg-gradient-to-r from-black via-red-900/20 to-black opacity-80"
           style={{
-            transform: `perspective(1000px) rotateX(${(mousePosition.y - 0.5) * 10}deg) rotateY(${(mousePosition.x - 0.5) * 10}deg)`,
-            transition: 'transform 0.2s ease-out'
+            transform: `perspective(1000px) rotateX(${(mousePosition.y - 0.5) * 5}deg) rotateY(${(mousePosition.x - 0.5) * 5}deg)`,
+            transition: 'transform 0.1s ease-out'
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-red-900/10 to-transparent animate-pulse" />
       </div>
 
       <div className="container mx-auto px-4 md:px-6 relative">
         <div className="flex justify-between items-center">
           <Link 
             to="/" 
-            className="text-white font-extrabold text-xl md:text-2xl tracking-wider hover:text-red-500 transition-colors duration-300"
+            className="text-white font-extrabold text-xl md:text-2xl tracking-wider"
           >
             TRIBUTO A DEFTONES
           </Link>
@@ -151,19 +136,17 @@ const Navbar: React.FC = () => {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-gray-300 hover:text-red-500 transition-colors duration-300 font-medium tracking-wide relative group"
+                  className="text-gray-300 hover:text-red-500 transition-colors duration-300 font-medium tracking-wide"
                 >
                   {link.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full" />
                 </a>
               ) : (
                 <Link
                   key={link.name}
                   to={link.href}
-                  className="text-gray-300 hover:text-red-500 transition-colors duration-300 font-medium tracking-wide relative group"
+                  className="text-gray-300 hover:text-red-500 transition-colors duration-300 font-medium tracking-wide"
                 >
                   {link.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full" />
                 </Link>
               )
             ))}
