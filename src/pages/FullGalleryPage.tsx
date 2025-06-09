@@ -2,91 +2,130 @@ import React, { useState, useEffect } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// Importar todas las imágenes disponibles
-const galleryImages = [
-  { id: 1, src: 'src/resources/imgs/DSC_1052-Enhanced-NR.jpg', alt: 'Live performance' },
-  { id: 2, src: 'src/resources/imgs/DSC_1042.jpg', alt: 'Band on stage' },
-  { id: 3, src: 'src/resources/imgs/DSC_1040.jpg', alt: 'Concert moment' },
-  { id: 4, src: 'src/resources/imgs/DSC_1038-Enhanced-NR.jpg', alt: 'Live show' },
-  { id: 5, src: 'src/resources/imgs/DSC_1034.jpg', alt: 'Performance' },
-  { id: 6, src: 'src/resources/imgs/DSC_1030-Enhanced-NR.jpg', alt: 'Stage presence' },
-  { id: 7, src: 'src/resources/imgs/DSC_1021-2-Enhanced-NR.jpg', alt: 'Live energy' },
-  { id: 8, src: 'src/resources/imgs/DSC_1020-Enhanced-NR.jpg', alt: 'Concert atmosphere' },
-  { id: 9, src: 'src/resources/imgs/DSC_1019-2-Enhanced-NR.jpg', alt: 'Band performance' },
-  { id: 10, src: 'src/resources/imgs/DSC_1016.jpg', alt: 'Live moment' },
-  { id: 11, src: 'src/resources/imgs/DSC_1012.jpg', alt: 'Stage show' },
-  { id: 12, src: 'src/resources/imgs/DSC_1009.jpg', alt: 'Concert experience' },
-  { id: 13, src: 'src/resources/imgs/DSC_1004-Enhanced-NR.jpg', alt: 'Live performance' },
-  { id: 14, src: 'src/resources/imgs/DSC_1003.jpg', alt: 'Band moment' },
-  { id: 15, src: 'src/resources/imgs/DSC_1002-Enhanced-NR.jpg', alt: 'Stage presence' },
-  { id: 16, src: 'src/resources/imgs/DSC_1001-2-Enhanced-NR.jpg', alt: 'Live energy' },
-  { id: 17, src: 'src/resources/imgs/DSC_1000.jpg', alt: 'Concert atmosphere' },
-  { id: 18, src: 'src/resources/imgs/DSC_0999-2-Enhanced-NR.jpg', alt: 'Band performance' },
-  { id: 19, src: 'src/resources/imgs/DSC_0998-Enhanced-NR.jpg', alt: 'Live show' },
-  { id: 20, src: 'src/resources/imgs/DSC_0997.jpg', alt: 'Stage moment' },
-  { id: 21, src: 'src/resources/imgs/DSC_0994-2-Enhanced-NR.jpg', alt: 'Live performance' },
-  { id: 22, src: 'src/resources/imgs/DSC_0993.jpg', alt: 'Band on stage' },
-  { id: 23, src: 'src/resources/imgs/DSC_0991.jpg', alt: 'Concert moment' },
-  { id: 24, src: 'src/resources/imgs/DSC_0989.jpg', alt: 'Live show' },
-  { id: 25, src: 'src/resources/imgs/DSC_0988.jpg', alt: 'Performance' },
-  { id: 26, src: 'src/resources/imgs/DSC_0984.jpg', alt: 'Stage presence' },
-  { id: 27, src: 'src/resources/imgs/DSC_0981-2-Enhanced-NR.jpg', alt: 'Live energy' },
-  { id: 28, src: 'src/resources/imgs/DSC_0975.jpg', alt: 'Concert atmosphere' },
-  { id: 29, src: 'src/resources/imgs/DSC_0974.jpg', alt: 'Band performance' },
-  { id: 30, src: 'src/resources/imgs/DSC_0969.jpg', alt: 'Live moment' },
-  { id: 31, src: 'src/resources/imgs/DSC_0967-2-Enhanced-NR.jpg', alt: 'Stage show' },
-  { id: 32, src: 'src/resources/imgs/DSC_0966-2-Enhanced-NR.jpg', alt: 'Concert experience' },
-  { id: 33, src: 'src/resources/imgs/DSC_0965-2-Enhanced-NR.jpg', alt: 'Live performance' },
-  { id: 34, src: 'src/resources/imgs/DSC_0963.jpg', alt: 'Band moment' },
-  { id: 35, src: 'src/resources/imgs/DSC_0960-2-Enhanced-NR.jpg', alt: 'Stage presence' },
-  { id: 36, src: 'src/resources/imgs/DSC_0958.jpg', alt: 'Live energy' },
-  { id: 37, src: 'src/resources/imgs/DSC_0954.jpg', alt: 'Concert atmosphere' },
-  { id: 38, src: 'src/resources/imgs/DSC_0953-2-Enhanced-NR.jpg', alt: 'Band performance' },
-  { id: 39, src: 'src/resources/imgs/DSC_0951.jpg', alt: 'Live show' },
-  { id: 40, src: 'src/resources/imgs/DSC_0949.jpg', alt: 'Stage moment' },
-  { id: 41, src: 'src/resources/imgs/DSC_0948-2-Enhanced-NR.jpg', alt: 'Live performance' },
-  { id: 42, src: 'src/resources/imgs/DSC_0947.jpg', alt: 'Band on stage' },
-  { id: 43, src: 'src/resources/imgs/DSC_0944-Enhanced-NR.jpg', alt: 'Concert moment' },
-  { id: 44, src: 'src/resources/imgs/DSC_0943-2-Enhanced-NR.jpg', alt: 'Live show' },
-  { id: 45, src: 'src/resources/imgs/DSC_0939-2.jpg', alt: 'Performance' },
-  { id: 46, src: 'src/resources/imgs/DSC_0937-2-Enhanced-NR.jpg', alt: 'Stage presence' },
-  { id: 47, src: 'src/resources/imgs/DSC_0936.jpg', alt: 'Live energy' },
-  { id: 48, src: 'src/resources/imgs/DSC_0935.jpg', alt: 'Concert atmosphere' },
-  { id: 49, src: 'src/resources/imgs/DSC_0933-Enhanced-NR.jpg', alt: 'Band performance' },
-  { id: 50, src: 'src/resources/imgs/DSC_0932-2-Enhanced-NR-3.jpg', alt: 'Live moment' },
-  { id: 51, src: 'src/resources/imgs/DSC_0931.jpg', alt: 'Stage show' },
-  { id: 52, src: 'src/resources/imgs/DSC_0929.jpg', alt: 'Concert experience' },
-  { id: 53, src: 'src/resources/imgs/DSC_0928.jpg', alt: 'Live performance' },
-  { id: 54, src: 'src/resources/imgs/DSC_0927.jpg', alt: 'Band moment' },
-  { id: 55, src: 'src/resources/imgs/DSC_0926.jpg', alt: 'Stage presence' },
-  { id: 56, src: 'src/resources/imgs/DSC_0925.jpg', alt: 'Live energy' },
-  { id: 57, src: 'src/resources/imgs/DSC_0923-2-Enhanced-NR.jpg', alt: 'Concert atmosphere' },
-  { id: 58, src: 'src/resources/imgs/DSC_0922-Enhanced-NR.jpg', alt: 'Band performance' },
-  { id: 59, src: 'src/resources/imgs/DSC_0920-2-Enhanced-NR.jpg', alt: 'Live show' },
-  { id: 60, src: 'src/resources/imgs/DSC_0918.jpg', alt: 'Stage moment' },
-  { id: 61, src: 'src/resources/imgs/DSC_0916-2-Enhanced-NR.jpg', alt: 'Live performance' },
-  { id: 62, src: 'src/resources/imgs/DSC_0915.jpg', alt: 'Band on stage' },
-  { id: 63, src: 'src/resources/imgs/DSC_0910-2-Enhanced-NR.jpg', alt: 'Concert moment' },
-  { id: 64, src: 'src/resources/imgs/DSC_0909-2-Enhanced-NR.jpg', alt: 'Live show' },
-  { id: 65, src: 'src/resources/imgs/DSC_0903.jpg', alt: 'Performance' },
-  { id: 66, src: 'src/resources/imgs/DSC_0902.jpg', alt: 'Stage presence' },
-  { id: 67, src: 'src/resources/imgs/DSC_0901.jpg', alt: 'Live energy' },
-  { id: 68, src: 'src/resources/imgs/DSC_0893-2-Enhanced-NR.jpg', alt: 'Concert atmosphere' },
-  { id: 69, src: 'src/resources/imgs/DSC_0891-Enhanced-NR.jpg', alt: 'Band performance' },
-  { id: 70, src: 'src/resources/imgs/marto.jpg', alt: 'Marto portrait' },
-  { id: 71, src: 'src/resources/imgs/ivan.jpg', alt: 'Ivan portrait' },
-  { id: 72, src: 'src/resources/imgs/gabo.jpg', alt: 'Gabo portrait' },
-  { id: 73, src: 'src/resources/imgs/facu.jpg', alt: 'Facu portrait' },
-  { id: 74, src: 'src/resources/imgs/bandagrande.jpg', alt: 'Full band photo' },
-  { id: 75, src: 'src/resources/imgs/banda.jpg', alt: 'Band group photo' },
-  { id: 76, src: 'src/resources/imgs/agus2.jpg', alt: 'Agus portrait 2' },
-  { id: 77, src: 'src/resources/imgs/agus.jpg', alt: 'Agus portrait' }
-];
-
 const FullGalleryPage: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState<string>('shots');
+
+  const categories = [
+    { id: 'shots', name: 'SHOTS' },
+    { id: 'stickers', name: 'STICKERS' },
+    { id: 'picks', name: 'PUAS' },
+    { id: 'flag', name: 'BANDERA' },
+    { id: 'logos', name: 'LOGOS' },
+    { id: 'techniques', name: 'TECHNICAL' }
+  ];
+
+  const galleryImages = [
+    // Shots
+    { id: 1, src: 'src/resources/imgs/DSC_1052-Enhanced-NR.jpg', alt: 'Live performance', category: 'shots' },
+    { id: 2, src: 'src/resources/imgs/DSC_1042.jpg', alt: 'Band on stage', category: 'shots' },
+    { id: 3, src: 'src/resources/imgs/DSC_1040.jpg', alt: 'Concert moment', category: 'shots' },
+    { id: 4, src: 'src/resources/imgs/DSC_1038-Enhanced-NR.jpg', alt: 'Live show', category: 'shots' },
+    { id: 5, src: 'src/resources/imgs/DSC_1034.jpg', alt: 'Performance', category: 'shots' },
+    { id: 6, src: 'src/resources/imgs/DSC_1030-Enhanced-NR.jpg', alt: 'Stage presence', category: 'shots' },
+    { id: 7, src: 'src/resources/imgs/DSC_1021-2-Enhanced-NR.jpg', alt: 'Live energy', category: 'shots' },
+    { id: 8, src: 'src/resources/imgs/DSC_1020-Enhanced-NR.jpg', alt: 'Concert atmosphere', category: 'shots' },
+    { id: 9, src: 'src/resources/imgs/DSC_1019-2-Enhanced-NR.jpg', alt: 'Band performance', category: 'shots' },
+    { id: 10, src: 'src/resources/imgs/DSC_1016.jpg', alt: 'Live moment', category: 'shots' },
+    { id: 11, src: 'src/resources/imgs/DSC_1012.jpg', alt: 'Stage show', category: 'shots' },
+    { id: 12, src: 'src/resources/imgs/DSC_1009.jpg', alt: 'Concert experience', category: 'shots' },
+    { id: 13, src: 'src/resources/imgs/DSC_1004-Enhanced-NR.jpg', alt: 'Live performance', category: 'shots' },
+    { id: 14, src: 'src/resources/imgs/DSC_1003.jpg', alt: 'Band moment', category: 'shots' },
+    { id: 15, src: 'src/resources/imgs/DSC_1002-Enhanced-NR.jpg', alt: 'Stage presence', category: 'shots' },
+    { id: 16, src: 'src/resources/imgs/DSC_1001-2-Enhanced-NR.jpg', alt: 'Live energy', category: 'shots' },
+    { id: 17, src: 'src/resources/imgs/DSC_1000.jpg', alt: 'Concert atmosphere', category: 'shots' },
+    { id: 18, src: 'src/resources/imgs/DSC_0999-2-Enhanced-NR.jpg', alt: 'Band performance', category: 'shots' },
+    { id: 19, src: 'src/resources/imgs/DSC_0998-Enhanced-NR.jpg', alt: 'Live show', category: 'shots' },
+    { id: 20, src: 'src/resources/imgs/DSC_0997.jpg', alt: 'Stage moment', category: 'shots' },
+    { id: 21, src: 'src/resources/imgs/DSC_0994-2-Enhanced-NR.jpg', alt: 'Live performance', category: 'shots' },
+    { id: 22, src: 'src/resources/imgs/DSC_0993.jpg', alt: 'Band on stage', category: 'shots' },
+    { id: 23, src: 'src/resources/imgs/DSC_0991.jpg', alt: 'Concert moment', category: 'shots' },
+    { id: 24, src: 'src/resources/imgs/DSC_0989.jpg', alt: 'Live show', category: 'shots' },
+    { id: 25, src: 'src/resources/imgs/DSC_0988.jpg', alt: 'Performance', category: 'shots' },
+    { id: 26, src: 'src/resources/imgs/DSC_0984.jpg', alt: 'Stage presence', category: 'shots' },
+    { id: 27, src: 'src/resources/imgs/DSC_0981-2-Enhanced-NR.jpg', alt: 'Live energy', category: 'shots' },
+    { id: 28, src: 'src/resources/imgs/DSC_0975.jpg', alt: 'Concert atmosphere', category: 'shots' },
+    { id: 29, src: 'src/resources/imgs/DSC_0974.jpg', alt: 'Band performance', category: 'shots' },
+    { id: 30, src: 'src/resources/imgs/DSC_0969.jpg', alt: 'Live moment', category: 'shots' },
+    { id: 31, src: 'src/resources/imgs/DSC_0967-2-Enhanced-NR.jpg', alt: 'Stage show', category: 'shots' },
+    { id: 32, src: 'src/resources/imgs/DSC_0966-2-Enhanced-NR.jpg', alt: 'Concert experience', category: 'shots' },
+    { id: 33, src: 'src/resources/imgs/DSC_0965-2-Enhanced-NR.jpg', alt: 'Live performance', category: 'shots' },
+    { id: 34, src: 'src/resources/imgs/DSC_0963.jpg', alt: 'Band moment', category: 'shots' },
+    { id: 35, src: 'src/resources/imgs/DSC_0960-2-Enhanced-NR.jpg', alt: 'Stage presence', category: 'shots' },
+    { id: 36, src: 'src/resources/imgs/DSC_0958.jpg', alt: 'Live energy', category: 'shots' },
+    { id: 37, src: 'src/resources/imgs/DSC_0954.jpg', alt: 'Concert atmosphere', category: 'shots' },
+    { id: 38, src: 'src/resources/imgs/DSC_0953-2-Enhanced-NR.jpg', alt: 'Band performance', category: 'shots' },
+    { id: 39, src: 'src/resources/imgs/DSC_0951.jpg', alt: 'Live show', category: 'shots' },
+    { id: 40, src: 'src/resources/imgs/DSC_0949.jpg', alt: 'Stage moment', category: 'shots' },
+    { id: 41, src: 'src/resources/imgs/DSC_0948-2-Enhanced-NR.jpg', alt: 'Live performance', category: 'shots' },
+    { id: 42, src: 'src/resources/imgs/DSC_0947.jpg', alt: 'Band on stage', category: 'shots' },
+    { id: 43, src: 'src/resources/imgs/DSC_0944-Enhanced-NR.jpg', alt: 'Concert moment', category: 'shots' },
+    { id: 44, src: 'src/resources/imgs/DSC_0943-2-Enhanced-NR.jpg', alt: 'Live show', category: 'shots' },
+    { id: 45, src: 'src/resources/imgs/DSC_0939-2.jpg', alt: 'Performance', category: 'shots' },
+    { id: 46, src: 'src/resources/imgs/DSC_0937-2-Enhanced-NR.jpg', alt: 'Stage presence', category: 'shots' },
+    { id: 47, src: 'src/resources/imgs/DSC_0936.jpg', alt: 'Live energy', category: 'shots' },
+    { id: 48, src: 'src/resources/imgs/DSC_0935.jpg', alt: 'Concert atmosphere', category: 'shots' },
+    { id: 49, src: 'src/resources/imgs/DSC_0933-Enhanced-NR.jpg', alt: 'Band performance', category: 'shots' },
+    { id: 50, src: 'src/resources/imgs/DSC_0932-2-Enhanced-NR-3.jpg', alt: 'Live moment', category: 'shots' },
+    { id: 51, src: 'src/resources/imgs/DSC_0931.jpg', alt: 'Stage show', category: 'shots' },
+    { id: 52, src: 'src/resources/imgs/DSC_0929.jpg', alt: 'Concert experience', category: 'shots' },
+    { id: 53, src: 'src/resources/imgs/DSC_0928.jpg', alt: 'Live performance', category: 'shots' },
+    { id: 54, src: 'src/resources/imgs/DSC_0927.jpg', alt: 'Band moment', category: 'shots' },
+    { id: 55, src: 'src/resources/imgs/DSC_0926.jpg', alt: 'Stage presence', category: 'shots' },
+    { id: 56, src: 'src/resources/imgs/DSC_0925.jpg', alt: 'Live energy', category: 'shots' },
+    { id: 57, src: 'src/resources/imgs/DSC_0923-2-Enhanced-NR.jpg', alt: 'Concert atmosphere', category: 'shots' },
+    { id: 58, src: 'src/resources/imgs/DSC_0922-Enhanced-NR.jpg', alt: 'Band performance', category: 'shots' },
+    { id: 59, src: 'src/resources/imgs/DSC_0920-2-Enhanced-NR.jpg', alt: 'Live show', category: 'shots' },
+    { id: 60, src: 'src/resources/imgs/DSC_0918.jpg', alt: 'Stage moment', category: 'shots' },
+    { id: 61, src: 'src/resources/imgs/DSC_0916-2-Enhanced-NR.jpg', alt: 'Live performance', category: 'shots' },
+    { id: 62, src: 'src/resources/imgs/DSC_0915.jpg', alt: 'Band on stage', category: 'shots' },
+    { id: 63, src: 'src/resources/imgs/DSC_0910-2-Enhanced-NR.jpg', alt: 'Concert moment', category: 'shots' },
+    { id: 64, src: 'src/resources/imgs/DSC_0909-2-Enhanced-NR.jpg', alt: 'Live show', category: 'shots' },
+    { id: 65, src: 'src/resources/imgs/DSC_0903.jpg', alt: 'Performance', category: 'shots' },
+    { id: 66, src: 'src/resources/imgs/DSC_0902.jpg', alt: 'Stage presence', category: 'shots' },
+    { id: 67, src: 'src/resources/imgs/DSC_0901.jpg', alt: 'Live energy', category: 'shots' },
+    { id: 68, src: 'src/resources/imgs/DSC_0893-2-Enhanced-NR.jpg', alt: 'Concert atmosphere', category: 'shots' },
+    { id: 69, src: 'src/resources/imgs/DSC_0891-Enhanced-NR.jpg', alt: 'Band performance', category: 'shots' },
+    { id: 70, src: 'src/resources/imgs/marto.jpg', alt: 'Marto portrait', category: 'shots' },
+    { id: 71, src: 'src/resources/imgs/ivan.jpg', alt: 'Ivan portrait', category: 'shots' },
+    { id: 72, src: 'src/resources/imgs/gabo.jpg', alt: 'Gabo portrait', category: 'shots' },
+    { id: 73, src: 'src/resources/imgs/facu.jpg', alt: 'Facu portrait', category: 'shots' },
+    { id: 74, src: 'src/resources/imgs/bandagrande.jpg', alt: 'Full band photo', category: 'shots' },
+    { id: 75, src: 'src/resources/imgs/banda.jpg', alt: 'Band group photo', category: 'shots' },
+    { id: 76, src: 'src/resources/imgs/agus2.jpg', alt: 'Agus portrait 2', category: 'shots' },
+    { id: 77, src: 'src/resources/imgs/agus.jpg', alt: 'Agus portrait', category: 'shots' },
+
+    // Stickers
+    { id: 78, src: '/src/resources/toys/Artboard Sticker palermo.jpg', alt: 'Sticker Palermo', category: 'stickers' },
+    { id: 79, src: '/src/resources/toys/Artboard Sticker palermo02.jpg', alt: 'Sticker Palermo 2', category: 'stickers' },
+    { id: 91, src: '/src/resources/toys/PrimerArtBoartSticker.jpg', alt: 'Sticker SM Original', category: 'stickers' },
+    
+    // Puas
+    { id: 80, src: '/src/resources/toys/PrimeraPuaSM.jpeg', alt: 'Pua SM 1', category: 'picks' },
+    { id: 81, src: '/src/resources/toys/SegundaPuaSM.jpg', alt: 'Pua SM 2', category: 'picks' },
+    { id: 82, src: '/src/resources/toys/TerceraPuaSM.01.jpg', alt: 'Pua SM 3.1', category: 'picks' },
+    { id: 83, src: '/src/resources/toys/TerceraPuaSM.02.jpg', alt: 'Pua SM 3.2', category: 'picks' },
+    
+    // Flag
+    { id: 84, src: '/src/resources/toys/Artboard@flag.png', alt: 'Bandera SM', category: 'flag' },
+    { id: 92, src: '/src/resources/toys/Artboard@flag02.png', alt: 'Bandera SM 2', category: 'flag' },
+    
+    // Logos
+    { id: 86, src: '/src/resources/toys/Asset 4LOGO.png', alt: 'Logo SM 1', category: 'logos' },
+    { id: 93, src: '/src/resources/toys/Asset4LOGO2.png', alt: 'Logo SM 2', category: 'logos' },
+    
+    // Technical
+    { id: 87, src: '/src/resources/toys/Setlist sangre negra viernes 7 de marzo.jpg', alt: 'Setlist Sangre Negra', category: 'techniques' },
+    { id: 88, src: '/src/resources/toys/Setlist palermo_liverpool.jpg', alt: 'Setlist Palermo Liverpool', category: 'techniques' },
+    { id: 89, src: '/src/resources/toys/Rider tecnico_palermo_liverpool.jpg', alt: 'Rider Técnico Palermo Liverpool', category: 'techniques' },
+    { id: 90, src: '/src/resources/toys/Artboard 1.Setlist-SixBar.Abril.jpg', alt: 'Setlist Six Bar', category: 'techniques' }
+  ];
+
+  const filteredImages = selectedCategory === 'shots' 
+    ? galleryImages.filter(img => img.category === 'shots')
+    : galleryImages.filter(img => img.category === selectedCategory);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -154,11 +193,28 @@ const FullGalleryPage: React.FC = () => {
         }}
       />
 
-      <main className="relative w-full min-h-screen overflow-y-auto">
+      <main className="relative w-full h-screen overflow-y-auto">
         <div className="w-full px-4 py-24">
-          <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-8">
             <span className="text-red-600">FULL</span> GALLERY
           </h1>
+
+          {/* Category Buttons */}
+          <div className="flex flex-wrap justify-center gap-4 mb-16">
+            {categories.map((category) => (
+              <button
+                key={category.id}
+                onClick={() => setSelectedCategory(category.id)}
+                className={`px-6 py-3 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105
+                  ${selectedCategory === category.id 
+                    ? 'bg-red-600 text-white shadow-lg shadow-red-500/20' 
+                    : 'bg-white/10 text-white/70 hover:bg-white/20 hover:text-white'
+                  }`}
+              >
+                {category.name}
+              </button>
+            ))}
+          </div>
 
           {isLoading ? (
             <div className="flex justify-center items-center h-64">
@@ -166,15 +222,23 @@ const FullGalleryPage: React.FC = () => {
             </div>
           ) : (
             <motion.div 
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8 max-w-[1600px] mx-auto pb-16"
+              className={`grid gap-8 max-w-[1600px] mx-auto pb-16 ${
+                selectedCategory === 'shots' 
+                  ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3'
+                  : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2'
+              }`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
             >
-              {galleryImages.map((image, index) => (
+              {filteredImages.map((image, index) => (
                 <motion.div
                   key={image.id}
-                  className="relative group cursor-pointer overflow-hidden rounded-lg shadow-2xl aspect-[4/3]"
+                  className={`relative group cursor-pointer overflow-hidden rounded-lg shadow-2xl ${
+                    selectedCategory === 'shots' 
+                      ? 'aspect-[4/3]'
+                      : 'aspect-auto'
+                  }`}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -183,7 +247,11 @@ const FullGalleryPage: React.FC = () => {
                   <img
                     src={image.src}
                     alt={image.alt}
-                    className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+                    className={`w-full h-full transform transition-transform duration-500 group-hover:scale-105 ${
+                      selectedCategory === 'shots' 
+                        ? 'object-cover'
+                        : 'object-contain'
+                    }`}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </motion.div>
@@ -208,9 +276,13 @@ const FullGalleryPage: React.FC = () => {
               style={getParallaxStyle()}
             >
               <img
-                src={galleryImages.find(img => img.id === selectedImage)?.src}
-                alt={galleryImages.find(img => img.id === selectedImage)?.alt}
-                className="max-w-full max-h-[90vh] w-auto h-auto object-contain"
+                src={filteredImages.find(img => img.id === selectedImage)?.src}
+                alt={filteredImages.find(img => img.id === selectedImage)?.alt}
+                className={`max-w-full max-h-[90vh] w-auto h-auto ${
+                  selectedCategory === 'shots' 
+                    ? 'object-contain'
+                    : 'object-contain'
+                }`}
               />
               
               {/* Navigation Buttons */}
