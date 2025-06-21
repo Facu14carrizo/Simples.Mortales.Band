@@ -24,6 +24,11 @@ Bienvenidos al sitio oficial de **Simples Mortales**, la banda argentina de nu m
 
 ---
 
+## Vista previa del modelo 3D de la pua
+
+![Modelo 3D de la pua](public//puaSM-model.gif)
+
+
 ## 🛠️ Stack Tecnológico
 
 | Función                  | Tecnología                                                                                          |
