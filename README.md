@@ -1,4 +1,4 @@
-# 🎸 Sitio Web Oficial - Simples Mortales
+# 🎸 App Web Oficial - Simples Mortales
 
 ![Foto de la banda Simples Mortales](public/banda.jpg)
 
