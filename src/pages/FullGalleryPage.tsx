@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import StickerAlbum from '../components/StickerAlbum';
+import PosterAlbum from '../components/PosterAlbum';
+import PhoneVideo from '../components/PhoneVideo';
 
 const FullGalleryPage: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
@@ -11,14 +14,16 @@ const FullGalleryPage: React.FC = () => {
   const categories = [
     { id: 'shots', name: 'SHOTS' },
     { id: 'stickers', name: 'STICKERS' },
+    { id: 'posters', name: 'POSTERS' },
     { id: 'picks', name: 'PUAS' },
-    { id: 'flag', name: 'BANDERA' },
+    { id: 'flag', name: 'BANDERAS' },
     { id: 'logos', name: 'LOGOS' },
-    { id: 'techniques', name: 'TECHNICAL' }
+    { id: 'techniques', name: 'TECHNICAL' },
+    { id: 'varios', name: 'VARIOS' }
   ];
 
   const galleryImages = [
-    // Shots
+    // Shots - Todas las fotos DSC_ y retratos
     { id: 1, src: 'src/resources/imgs/DSC_1052-Enhanced-NR.jpg', alt: 'Live performance', category: 'shots' },
     { id: 2, src: 'src/resources/imgs/DSC_1042.jpg', alt: 'Band on stage', category: 'shots' },
     { id: 3, src: 'src/resources/imgs/DSC_1040.jpg', alt: 'Concert moment', category: 'shots' },
@@ -97,30 +102,45 @@ const FullGalleryPage: React.FC = () => {
     { id: 76, src: 'src/resources/imgs/agus2.jpg', alt: 'Agus portrait 2', category: 'shots' },
     { id: 77, src: 'src/resources/imgs/agus.jpg', alt: 'Agus portrait', category: 'shots' },
 
-    // Stickers
-    { id: 78, src: '/src/resources/toys/Artboard Sticker palermo.jpg', alt: 'Sticker Palermo', category: 'stickers' },
-    { id: 79, src: '/src/resources/toys/Artboard Sticker palermo02.jpg', alt: 'Sticker Palermo 2', category: 'stickers' },
-    { id: 91, src: '/src/resources/toys/PrimerArtBoartSticker.jpg', alt: 'Sticker SM Original', category: 'stickers' },
+    // Puas - Todas las puas
+    { id: 78, src: 'src/resources/toys/PrimeraPuaSM.jpeg', alt: 'Pua SM 1', category: 'picks' },
+    { id: 79, src: 'src/resources/toys/SegundaPuaSM.jpg', alt: 'Pua SM 2', category: 'picks' },
+    { id: 80, src: 'src/resources/toys/TerceraPuaSM.01.jpg', alt: 'Pua SM 3.1', category: 'picks' },
+    { id: 81, src: 'src/resources/toys/TerceraPuaSM.02.jpg', alt: 'Pua SM 3.2', category: 'picks' },
+    { id: 82, src: 'src/resources/toys/puasPrimeraGeneracion.jpeg', alt: 'Puas Primera Generación', category: 'picks' },
+    { id: 83, src: 'src/resources/toys/puasSegundaGeneracion.jpeg', alt: 'Puas Segunda Generación', category: 'picks' },
     
-    // Puas
-    { id: 80, src: '/src/resources/toys/PrimeraPuaSM.jpeg', alt: 'Pua SM 1', category: 'picks' },
-    { id: 81, src: '/src/resources/toys/SegundaPuaSM.jpg', alt: 'Pua SM 2', category: 'picks' },
-    { id: 82, src: '/src/resources/toys/TerceraPuaSM.01.jpg', alt: 'Pua SM 3.1', category: 'picks' },
-    { id: 83, src: '/src/resources/toys/TerceraPuaSM.02.jpg', alt: 'Pua SM 3.2', category: 'picks' },
+    // Banderas - Todas las banderas
+    { id: 84, src: 'src/resources/toys/Artboard@flag.png', alt: 'Bandera SM', category: 'flag' },
+    { id: 85, src: 'src/resources/toys/Artboard@flag02.png', alt: 'Bandera SM 2', category: 'flag' },
+    { id: 86, src: 'src/resources/toys/Artboard@flag03.jpeg', alt: 'Bandera SM 3', category: 'flag' },
+    { id: 87, src: 'src/resources/toys/Artboard@flag04.jpeg', alt: 'Bandera SM 4', category: 'flag' },
+    { id: 88, src: 'src/resources/toys/Artboard@flag05.jpeg', alt: 'Bandera SM 5', category: 'flag' },
     
-    // Flag
-    { id: 84, src: '/src/resources/toys/Artboard@flag.png', alt: 'Bandera SM', category: 'flag' },
-    { id: 92, src: '/src/resources/toys/Artboard@flag02.png', alt: 'Bandera SM 2', category: 'flag' },
+    // Logos - Todos los logos
+    { id: 89, src: 'src/resources/toys/Asset 4LOGO.png', alt: 'Logo SM 1', category: 'logos' },
+    { id: 90, src: 'src/resources/toys/Asset4LOGO2.png', alt: 'Logo SM 2', category: 'logos' },
+    { id: 91, src: 'src/resources/toys/Asset4LOGO3.png', alt: 'Logo SM 3', category: 'logos' },
     
-    // Logos
-    { id: 86, src: '/src/resources/toys/Asset 4LOGO.png', alt: 'Logo SM 1', category: 'logos' },
-    { id: 93, src: '/src/resources/toys/Asset4LOGO2.png', alt: 'Logo SM 2', category: 'logos' },
+    // Technical - Setlists y riders
+    { id: 92, src: 'src/resources/toys/Setlist sangre negra viernes 7 de marzo.jpg', alt: 'Setlist Sangre Negra', category: 'techniques' },
+    { id: 93, src: 'src/resources/toys/Setlist palermo_liverpool.jpg', alt: 'Setlist Palermo Liverpool', category: 'techniques' },
+    { id: 94, src: 'src/resources/toys/Rider tecnico_palermo_liverpool.jpg', alt: 'Rider Técnico Palermo Liverpool', category: 'techniques' },
+    { id: 95, src: 'src/resources/toys/Artboard 1.Setlist-SixBar.Abril.jpg', alt: 'Setlist Six Bar', category: 'techniques' },
+    { id: 96, src: 'src/resources/toys/setlist (1)_page-0001.jpg', alt: 'Setlist 1', category: 'techniques' },
+    { id: 97, src: 'src/resources/toys/Setlist 15-02 (1)_page-0001.jpg', alt: 'Setlist 15-02', category: 'techniques' },
     
-    // Technical
-    { id: 87, src: '/src/resources/toys/Setlist sangre negra viernes 7 de marzo.jpg', alt: 'Setlist Sangre Negra', category: 'techniques' },
-    { id: 88, src: '/src/resources/toys/Setlist palermo_liverpool.jpg', alt: 'Setlist Palermo Liverpool', category: 'techniques' },
-    { id: 89, src: '/src/resources/toys/Rider tecnico_palermo_liverpool.jpg', alt: 'Rider Técnico Palermo Liverpool', category: 'techniques' },
-    { id: 90, src: '/src/resources/toys/Artboard 1.Setlist-SixBar.Abril.jpg', alt: 'Setlist Six Bar', category: 'techniques' }
+    // Varios - Todo lo demás
+    { id: 98, src: 'src/resources/toys/varios (1).jpeg', alt: 'Varios 1', category: 'varios' },
+    { id: 99, src: 'src/resources/toys/varios (2).jpeg', alt: 'Varios 2', category: 'varios' },
+    { id: 100, src: 'src/resources/toys/varios (3).jpeg', alt: 'Varios 3', category: 'varios' },
+    { id: 101, src: 'src/resources/toys/varios (4).jpeg', alt: 'Varios 4', category: 'varios' },
+    { id: 105, src: 'src/resources/toys/varios (1).mp4', alt: 'Varios Video', category: 'varios' },
+    { id: 106, src: 'src/resources/toys/bandaIA1.jpeg', alt: 'Banda IA 1', category: 'varios' },
+    { id: 107, src: 'src/resources/toys/bandaIA2.jpeg', alt: 'Banda IA 2', category: 'varios' },
+    { id: 108, src: 'src/resources/toys/bandaIA3.jpeg', alt: 'Banda IA 3', category: 'varios' },
+    { id: 109, src: 'src/resources/imgs/wallpaper.png', alt: 'Wallpaper', category: 'varios' },
+    { id: 110, src: 'src/resources/toys/Artboard Pin palermo04.png', alt: 'Pin Palermo', category: 'varios' },
   ];
 
   const filteredImages = selectedCategory === 'shots' 
@@ -128,11 +148,17 @@ const FullGalleryPage: React.FC = () => {
     : galleryImages.filter(img => img.category === selectedCategory);
 
   useEffect(() => {
+    let timeoutId: number;
+    
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: e.clientX / window.innerWidth,
-        y: e.clientY / window.innerHeight
-      });
+      // Throttle mouse move updates to improve performance
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        setMousePosition({
+          x: e.clientX / window.innerWidth,
+          y: e.clientY / window.innerHeight
+        });
+      }, 16); // ~60fps
     };
 
     window.addEventListener('mousemove', handleMouseMove);
@@ -145,6 +171,7 @@ const FullGalleryPage: React.FC = () => {
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       clearTimeout(timer);
+      clearTimeout(timeoutId);
     };
   }, []);
 
@@ -185,15 +212,10 @@ const FullGalleryPage: React.FC = () => {
 
   return (
     <div className="relative min-h-screen bg-zinc-900">
-      {/* Dynamic background gradient */}
-      <div 
-        className="fixed inset-0 opacity-20 transition-opacity duration-500"
-        style={{
-          background: `radial-gradient(circle at ${mousePosition.x * 100}% ${mousePosition.y * 100}%, rgba(220, 38, 38, 0.3), transparent 70%)`
-        }}
-      />
+      {/* Static background gradient instead of dynamic */}
+      <div className="fixed inset-0 opacity-20 bg-gradient-to-br from-red-600/30 via-transparent to-red-600/30"></div>
 
-      <main className="relative w-full h-screen overflow-y-auto">
+      <main className="relative w-full min-h-screen overflow-y-auto custom-scrollbar">
         <div className="w-full px-4 py-24">
           <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-8">
             <span className="text-red-600">FULL</span> GALLERY
@@ -216,47 +238,59 @@ const FullGalleryPage: React.FC = () => {
             ))}
           </div>
 
-          {isLoading ? (
+          {selectedCategory === 'stickers' ? (
+            <StickerAlbum />
+          ) : selectedCategory === 'posters' ? (
+            <PosterAlbum />
+          ) : isLoading ? (
             <div className="flex justify-center items-center h-64">
               <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-red-600"></div>
             </div>
           ) : (
-            <motion.div 
+            <div 
               className={`grid gap-8 max-w-[1600px] mx-auto pb-16 ${
                 selectedCategory === 'shots' 
                   ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3'
                   : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2'
               }`}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
             >
-              {filteredImages.map((image, index) => (
-                <motion.div
-                  key={image.id}
-                  className={`relative group cursor-pointer overflow-hidden rounded-lg shadow-2xl ${
-                    selectedCategory === 'shots' 
-                      ? 'aspect-[4/3]'
-                      : 'aspect-auto'
-                  }`}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  onClick={() => handleImageClick(image.id)}
-                >
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    className={`w-full h-full transform transition-transform duration-500 group-hover:scale-105 ${
+              {filteredImages.map((image, index) => {
+                // Check if it's a video file
+                const isVideo = image.src.toLowerCase().endsWith('.mp4');
+                
+                return (
+                  <div
+                    key={image.id}
+                    className={`relative group cursor-pointer overflow-hidden rounded-lg shadow-2xl transform transition-all duration-300 hover:scale-105 ${
                       selectedCategory === 'shots' 
-                        ? 'object-cover'
-                        : 'object-contain'
+                        ? 'aspect-[4/3]'
+                        : isVideo 
+                          ? 'aspect-auto flex justify-center items-center'
+                          : 'aspect-auto'
                     }`}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </motion.div>
-              ))}
-            </motion.div>
+                    onClick={() => handleImageClick(image.id)}
+                  >
+                    {isVideo ? (
+                      <PhoneVideo videoSrc={image.src} alt={image.alt} />
+                    ) : (
+                      <>
+                        <img
+                          src={image.src}
+                          alt={image.alt}
+                          loading="lazy"
+                          className={`w-full h-full transition-transform duration-500 ${
+                            selectedCategory === 'shots' 
+                              ? 'object-cover group-hover:scale-105'
+                              : 'object-contain'
+                          }`}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      </>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           )}
         </div>
       </main>
@@ -275,15 +309,38 @@ const FullGalleryPage: React.FC = () => {
               className="relative w-full h-full flex items-center justify-center py-8"
               style={getParallaxStyle()}
             >
-              <img
-                src={filteredImages.find(img => img.id === selectedImage)?.src}
-                alt={filteredImages.find(img => img.id === selectedImage)?.alt}
-                className={`max-w-full max-h-[90vh] w-auto h-auto ${
-                  selectedCategory === 'shots' 
-                    ? 'object-contain'
-                    : 'object-contain'
-                }`}
-              />
+              {(() => {
+                const selectedItem = filteredImages.find(img => img.id === selectedImage);
+                const isVideo = selectedItem?.src.toLowerCase().endsWith('.mp4');
+                
+                if (isVideo && selectedItem) {
+                  return (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <video
+                        src={selectedItem.src}
+                        controls
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="max-w-full max-h-[90vh] w-auto h-auto object-contain"
+                      />
+                    </div>
+                  );
+                }
+                
+                return (
+                  <img
+                    src={selectedItem?.src}
+                    alt={selectedItem?.alt}
+                    className={`max-w-full max-h-[90vh] w-auto h-auto ${
+                      selectedCategory === 'shots' 
+                        ? 'object-contain'
+                        : 'object-contain'
+                    }`}
+                  />
+                );
+              })()}
               
               {/* Navigation Buttons */}
               <button

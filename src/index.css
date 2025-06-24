@@ -42,6 +42,15 @@
   scrollbar-width: none;
 }
 
+/* Ensure custom scrollbar overrides hidden scrollbar */
+.custom-scrollbar.scrollbar-hide {
+  scrollbar-width: thin !important;
+}
+
+.custom-scrollbar.scrollbar-hide::-webkit-scrollbar {
+  display: block !important;
+}
+
 .glass-effect {
   background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(10px);
@@ -427,4 +436,247 @@
     opacity: 1;
     filter: blur(0.5px) brightness(1.2);
   }
+}
+
+/* Efecto hoja de revista para stickers */
+.magazine-sticker-effect {
+  transition: transform 0.7s cubic-bezier(.25,1.5,.5,1), box-shadow 0.5s, filter 0.5s;
+  box-shadow: 0 6px 32px 0 rgba(0,0,0,0.28), 0 2px 1px 0 rgba(255,255,255,0.10) inset;
+  border-radius: 0.7rem;
+  position: relative;
+  z-index: 1;
+  will-change: transform, box-shadow, filter;
+}
+.magazine-sticker-effect:hover {
+  transform: perspective(1200px) rotateY(-28deg) rotateX(10deg) scale(1.11) skewY(-4deg);
+  box-shadow: 0 24px 60px 0 rgba(0,0,0,0.45), 0 4px 24px 0 rgba(255,255,255,0.13) inset;
+  filter: brightness(1.13) contrast(1.13) saturate(1.15);
+}
+.magazine-sticker-effect::after {
+  content: '';
+  pointer-events: none;
+  position: absolute;
+  left: 0; top: 0; right: 0; bottom: 0;
+  border-radius: 0.7rem;
+  opacity: 0;
+  transition: opacity 0.5s;
+  background: linear-gradient(110deg, rgba(255,255,255,0.22) 12%, rgba(255,255,255,0.07) 60%, transparent 100%);
+  z-index: 2;
+}
+.magazine-sticker-effect:hover::after {
+  opacity: 1;
+}
+
+/* Optimized styles for PhoneVideo component */
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.slider::-webkit-slider-track {
+  background: rgba(255, 255, 255, 0.3);
+  height: 4px;
+  border-radius: 2px;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  background: #dc2626;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
+}
+
+.slider::-moz-range-track {
+  background: rgba(255, 255, 255, 0.3);
+  height: 4px;
+  border-radius: 2px;
+  border: none;
+}
+
+.slider::-moz-range-thumb {
+  background: #dc2626;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
+}
+
+/* Phone frame glow effect */
+.phone-glow {
+  box-shadow: 
+    0 0 20px rgba(220, 38, 38, 0.3),
+    0 0 40px rgba(220, 38, 38, 0.2),
+    0 0 60px rgba(220, 38, 38, 0.1);
+}
+
+/* Video controls animation */
+.video-controls {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Performance optimizations */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optimize transforms for better performance */
+.transform {
+  will-change: transform;
+}
+
+/* Reduce repaints for smooth scrolling */
+.overflow-y-auto {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Optimize video rendering */
+video {
+  will-change: auto;
+}
+
+/* Reduce animation complexity */
+.transition-all {
+  transition-property: transform, opacity, background-color;
+}
+
+/* Custom Scrollbar Styles */
+/* Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(24, 24, 27, 0.8);
+  border-radius: 6px;
+  margin: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #dc2626 0%, #991b1b 100%);
+  border-radius: 6px;
+  border: 2px solid rgba(24, 24, 27, 0.8);
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ef4444 0%, #dc2626 100%);
+  box-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(180deg, #f87171 0%, #ef4444 100%);
+  box-shadow: 0 0 15px rgba(220, 38, 38, 0.7);
+}
+
+::-webkit-scrollbar-corner {
+  background: rgba(24, 24, 27, 0.8);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #dc2626 rgba(24, 24, 27, 0.8);
+}
+
+/* Custom scrollbar for specific containers */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #dc2626 rgba(24, 24, 27, 0.8);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(24, 24, 27, 0.6);
+  border-radius: 4px;
+  margin: 2px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #dc2626 0%, #991b1b 100%);
+  border-radius: 4px;
+  border: 1px solid rgba(24, 24, 27, 0.6);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ef4444 0%, #dc2626 100%);
+}
+
+/* Ensure scrollbar is always visible and functional */
+html, body {
+  scrollbar-width: thin;
+  scrollbar-color: #dc2626 rgba(24, 24, 27, 0.8);
+}
+
+/* Override any hidden scrollbar styles */
+.overflow-y-auto {
+  scrollbar-width: thin !important;
+  scrollbar-color: #dc2626 rgba(24, 24, 27, 0.8) !important;
+}
+
+.overflow-y-auto::-webkit-scrollbar {
+  display: block !important;
+  width: 12px !important;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: rgba(24, 24, 27, 0.8) !important;
+  border-radius: 6px !important;
+  margin: 4px !important;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #dc2626 0%, #991b1b 100%) !important;
+  border-radius: 6px !important;
+  border: 2px solid rgba(24, 24, 27, 0.8) !important;
+}
+
+/* Force scrollbar visibility for main content */
+main.overflow-y-auto {
+  overflow-y: scroll !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: #dc2626 rgba(24, 24, 27, 0.8) !important;
+}
+
+main.overflow-y-auto::-webkit-scrollbar {
+  display: block !important;
+  width: 12px !important;
+  height: 12px !important;
+}
+
+main.overflow-y-auto::-webkit-scrollbar-track {
+  background: rgba(24, 24, 27, 0.8) !important;
+  border-radius: 6px !important;
+  margin: 4px !important;
+}
+
+main.overflow-y-auto::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #dc2626 0%, #991b1b 100%) !important;
+  border-radius: 6px !important;
+  border: 2px solid rgba(24, 24, 27, 0.8) !important;
+  transition: all 0.3s ease !important;
+}
+
+main.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ef4444 0%, #dc2626 100%) !important;
+  box-shadow: 0 0 10px rgba(220, 38, 38, 0.5) !important;
+}
+
+main.overflow-y-auto::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(180deg, #f87171 0%, #ef4444 100%) !important;
+  box-shadow: 0 0 15px rgba(220, 38, 38, 0.7) !important;
 }
