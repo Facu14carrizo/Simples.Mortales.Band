@@ -203,8 +203,36 @@ const Navbar: React.FC = () => {
               
               {/* Content */}
               <div className="relative flex items-center space-x-3 z-10">
-                <div className="relative float-animation energy-pulse">
-                  <Box className="w-10 h-10 animate-bounce text-red-300" style={{animationDuration: '2s'}} />
+                <div className="relative">
+                  <div className="relative" style={{
+                    transformStyle: 'preserve-3d',
+                    perspective: '200px',
+                    animation: 'cubeRotate 6s linear infinite'
+                  }}>
+                    <Box className="w-10 h-10 text-red-300" style={{
+                      transform: 'rotateX(45deg) rotateY(45deg)',
+                      filter: 'drop-shadow(0 0 15px rgba(220, 38, 38, 0.8))',
+                      textShadow: '0 0 10px rgba(220, 38, 38, 0.6)',
+                      animation: 'cubeGlow 3s ease-in-out infinite'
+                    }} />
+                    {/* Sombra simple */}
+                    <div className="absolute inset-0 w-10 h-10 bg-red-900/30 rounded-sm" style={{
+                      transform: 'rotateX(45deg) rotateY(45deg) translateZ(-5px)',
+                      filter: 'blur(2px)'
+                    }}></div>
+                    {/* Borde brillante */}
+                    <div className="absolute inset-0 w-10 h-10 border border-red-400/50 rounded-sm" style={{
+                      transform: 'rotateX(45deg) rotateY(45deg) translateZ(1px)',
+                      filter: 'blur(0.5px)',
+                      animation: 'cubeGlow 2s ease-in-out infinite'
+                    }}></div>
+                  </div>
+                  {/* Partículas flotantes alrededor del cubo */}
+                  <div className="absolute -top-1 -left-1 w-1 h-1 bg-red-400 rounded-full animate-ping" style={{animationDelay: '0s'}}></div>
+                  <div className="absolute -top-1 -right-1 w-1 h-1 bg-red-300 rounded-full animate-ping" style={{animationDelay: '0.5s'}}></div>
+                  <div className="absolute -bottom-1 -left-1 w-1 h-1 bg-red-500 rounded-full animate-ping" style={{animationDelay: '1s'}}></div>
+                  <div className="absolute -bottom-1 -right-1 w-1 h-1 bg-red-400 rounded-full animate-ping" style={{animationDelay: '1.5s'}}></div>
+                  
                   <Eye className="w-7 h-7 absolute -top-3 -right-3 text-red-400 animate-pulse" />
                   <Eye className="w-6 h-6 absolute -bottom-2 -left-2 text-red-500 animate-pulse" style={{animationDelay: '0.7s'}} />
                   <div className="absolute -top-2 -left-2 w-3 h-3 bg-red-400 rounded-full animate-ping" style={{animationDelay: '0.3s'}}></div>
