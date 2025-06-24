@@ -1,6 +1,6 @@
-# 🎸 Sitio Web Oficial - Simples Mortales
+# 🎸 App Web Oficial - Simples Mortales
 
-![Foto de la banda Simples Mortales](/banda.jpg)
+![Foto de la banda Simples Mortales](public/banda.jpg)
 
 Bienvenidos al sitio oficial de **Simples Mortales**, la banda argentina de nu metal que rinde tributo a una de las leyendas del rock alternativo: **Deftones**. Aquí podrás encontrar toda la información sobre la banda, sus shows, música y contenido exclusivo, además de disfrutar de una experiencia web interactiva y visualmente impactante.
 
@@ -23,6 +23,11 @@ Bienvenidos al sitio oficial de **Simples Mortales**, la banda argentina de nu m
 - **Código robusto y escalable:** Desarrollado con **TypeScript** para máxima seguridad y mantenibilidad.
 
 ---
+
+## Vista previa del modelo 3D de la pua
+
+![Modelo 3D de la pua](public//puaSM-model.gif)
+
 
 ## 🛠️ Stack Tecnológico
 
