@@ -680,3 +680,213 @@ main.overflow-y-auto::-webkit-scrollbar-thumb:active {
   background: linear-gradient(180deg, #f87171 0%, #ef4444 100%) !important;
   box-shadow: 0 0 15px rgba(220, 38, 38, 0.7) !important;
 }
+
+/* Estilos para el visualizador 3D */
+@keyframes viewerGlow {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px rgba(147, 51, 234, 0.3),
+      0 0 40px rgba(147, 51, 234, 0.2),
+      inset 0 0 20px rgba(147, 51, 234, 0.1);
+  }
+  50% {
+    box-shadow: 
+      0 0 40px rgba(147, 51, 234, 0.6),
+      0 0 80px rgba(147, 51, 234, 0.4),
+      inset 0 0 40px rgba(147, 51, 234, 0.2);
+  }
+}
+
+@keyframes viewerPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+@keyframes viewerBorder {
+  0%, 100% {
+    border-color: rgba(147, 51, 234, 0.5);
+  }
+  50% {
+    border-color: rgba(236, 72, 153, 0.8);
+  }
+}
+
+@keyframes backgroundShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes floatingParticles {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translateY(-10px) translateX(5px) rotate(90deg);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-20px) translateX(0px) rotate(180deg);
+    opacity: 1;
+  }
+  75% {
+    transform: translateY(-10px) translateX(-5px) rotate(270deg);
+    opacity: 0.7;
+  }
+}
+
+@keyframes energyWave {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+@keyframes loadingSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loadingPulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes textShine {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.viewer-container {
+  animation: viewerGlow 3s ease-in-out infinite, viewerPulse 4s ease-in-out infinite;
+}
+
+.viewer-border {
+  animation: viewerBorder 2s ease-in-out infinite;
+}
+
+.viewer-background {
+  background: linear-gradient(-45deg, #1a1a1a, #2d1b69, #831843, #1a1a1a);
+  background-size: 400% 400%;
+  animation: backgroundShift 8s ease infinite;
+}
+
+.floating-particle {
+  animation: floatingParticles 6s ease-in-out infinite;
+}
+
+.energy-wave {
+  animation: energyWave 2s ease-out infinite;
+}
+
+.loading-spinner {
+  animation: loadingSpin 1s linear infinite;
+}
+
+.loading-pulse {
+  animation: loadingPulse 1.5s ease-in-out infinite;
+}
+
+.text-shine-effect {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  background-size: 200% 100%;
+  animation: textShine 2s ease-in-out infinite;
+}
+
+/* Efectos de hover para las tarjetas */
+.feature-card {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.feature-card:hover::before {
+  left: 100%;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Efectos para los tabs */
+.tab-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.tab-button::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #a855f7, #ec4899);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.tab-button:hover::after {
+  width: 100%;
+}
+
+.tab-button.active::after {
+  width: 100%;
+}
+
+/* Efectos para el header */
+.header-glow {
+  text-shadow: 
+    0 0 10px rgba(147, 51, 234, 0.5),
+    0 0 20px rgba(147, 51, 234, 0.3),
+    0 0 30px rgba(147, 51, 234, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .viewer-container {
+    animation: viewerGlow 3s ease-in-out infinite;
+  }
+  
+  .floating-particle {
+    animation: floatingParticles 4s ease-in-out infinite;
+  }
+}

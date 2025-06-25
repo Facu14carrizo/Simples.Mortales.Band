@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Menu, X, Box, Eye } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 import type { Container, Engine } from "tsparticles-engine";
@@ -19,6 +19,10 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const location = useLocation();
+
+  // Determinar si estamos en la página del visualizador 3D
+  const isViewerPage = location.pathname === '/viewer-3d';
 
   const particlesInit = useCallback(async (engine: any) => {
     await loadFull(engine);
@@ -52,9 +56,11 @@ const Navbar: React.FC = () => {
 
   return (
     <nav 
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled 
+      className={`${isViewerPage ? 'relative' : 'fixed'} w-full z-50 transition-all duration-300 ${
+        scrolled && !isViewerPage
           ? 'bg-black/90 backdrop-blur-md py-3 shadow-xl'
+          : isViewerPage
+          ? 'bg-black/95 backdrop-blur-md py-4 shadow-xl'
           : 'bg-transparent py-6'
       }`}
     >

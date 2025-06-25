@@ -154,10 +154,10 @@ const FullGalleryPage: React.FC = () => {
       // Throttle mouse move updates to improve performance
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {
-        setMousePosition({
-          x: e.clientX / window.innerWidth,
-          y: e.clientY / window.innerHeight
-        });
+      setMousePosition({
+        x: e.clientX / window.innerWidth,
+        y: e.clientY / window.innerHeight
+      });
       }, 16); // ~60fps
     };
 
@@ -260,31 +260,31 @@ const FullGalleryPage: React.FC = () => {
                 
                 return (
                   <div
-                    key={image.id}
+                  key={image.id}
                     className={`relative group cursor-pointer overflow-hidden rounded-lg shadow-2xl transform transition-all duration-300 hover:scale-105 ${
-                      selectedCategory === 'shots' 
-                        ? 'aspect-[4/3]'
+                    selectedCategory === 'shots' 
+                      ? 'aspect-[4/3]'
                         : isVideo 
                           ? 'aspect-auto flex justify-center items-center'
-                          : 'aspect-auto'
-                    }`}
-                    onClick={() => handleImageClick(image.id)}
-                  >
+                      : 'aspect-auto'
+                  }`}
+                  onClick={() => handleImageClick(image.id)}
+                >
                     {isVideo ? (
                       <PhoneVideo videoSrc={image.src} alt={image.alt} />
                     ) : (
                       <>
-                        <img
-                          src={image.src}
-                          alt={image.alt}
+                  <img
+                    src={image.src}
+                    alt={image.alt}
                           loading="lazy"
                           className={`w-full h-full transition-transform duration-500 ${
-                            selectedCategory === 'shots' 
+                      selectedCategory === 'shots' 
                               ? 'object-cover group-hover:scale-105'
-                              : 'object-contain'
-                          }`}
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        : 'object-contain'
+                    }`}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       </>
                     )}
                   </div>
@@ -333,12 +333,12 @@ const FullGalleryPage: React.FC = () => {
                   <img
                     src={selectedItem?.src}
                     alt={selectedItem?.alt}
-                    className={`max-w-full max-h-[90vh] w-auto h-auto ${
-                      selectedCategory === 'shots' 
-                        ? 'object-contain'
-                        : 'object-contain'
-                    }`}
-                  />
+                className={`max-w-full max-h-[90vh] w-auto h-auto ${
+                  selectedCategory === 'shots' 
+                    ? 'object-contain'
+                    : 'object-contain'
+                }`}
+              />
                 );
               })()}
               
