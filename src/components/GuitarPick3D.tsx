@@ -1,7 +1,27 @@
-import React, { Suspense, useState } from 'react'
+import React, { Suspense, useState, useEffect, useMemo } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
+
+// Hook para detectar si es dispositivo móvil
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIsMobile = () => {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isMobileDevice = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
+      const isSmallScreen = window.innerWidth <= 768;
+      setIsMobile(isMobileDevice || isSmallScreen);
+    };
+
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
+
+  return isMobile;
+};
 
 // Cubo simple para verificar que Three.js funciona
 function Box() {
@@ -13,11 +33,10 @@ function Box() {
   )
 }
 
-function Model({ modelPath }: { modelPath: string }) {
+function Model({ modelPath, isMobile }: { modelPath: string; isMobile: boolean }) {
   const [error, setError] = useState<string | null>(null)
   
   try {
-    console.log('Intentando cargar modelo:', modelPath)
     const gltf = useGLTF(modelPath)
     
     if (!gltf.scene) {
@@ -25,16 +44,23 @@ function Model({ modelPath }: { modelPath: string }) {
       return null
     }
 
-    // Material simple y brillante
+    // Material optimizado para móviles
     const material = new THREE.MeshBasicMaterial({
       color: 0xff0000,
-      side: THREE.DoubleSide
+      side: THREE.DoubleSide,
+      transparent: true,
+      opacity: 0.9
     })
 
     // Aplicar material a todos los meshes
     gltf.scene.traverse((child) => {
       if (child instanceof THREE.Mesh) {
-        child.material = material
+        child.material = material;
+        // Optimizar geometría para móviles
+        if (isMobile && child.geometry) {
+          child.geometry.computeBoundingSphere();
+          child.geometry.computeBoundingBox();
+        }
       }
     })
 
@@ -48,6 +74,25 @@ function Model({ modelPath }: { modelPath: string }) {
 
 export default function GuitarPick3D() {
   const [currentModel, setCurrentModel] = useState<'box' | 'duck' | 'pua'>('box')
+  const isMobile = useIsMobile();
+
+  // Configuración optimizada para móviles
+  const canvasConfig = useMemo(() => ({
+    camera: { 
+      position: [0, 0, isMobile ? 8 : 5] as [number, number, number], 
+      fov: isMobile ? 35 : 45 
+    },
+    gl: { 
+      antialias: !isMobile,
+      alpha: false,
+      powerPreference: "high-performance" as WebGLPowerPreference,
+      stencil: false,
+      depth: true
+    }
+  }), [isMobile]);
+
+  // Reducir calidad en móviles
+  const renderQuality = isMobile ? 0.5 : 1;
 
   return (
     <div style={{ 
@@ -66,7 +111,8 @@ export default function GuitarPick3D() {
         borderRadius: '5px',
         color: 'white',
         display: 'flex',
-        gap: '10px'
+        gap: '10px',
+        flexWrap: 'wrap'
       }}>
         <button 
           onClick={() => setCurrentModel('box')}
@@ -76,7 +122,8 @@ export default function GuitarPick3D() {
             border: 'none',
             borderRadius: '4px',
             color: 'white',
-            cursor: 'pointer'
+            cursor: 'pointer',
+            fontSize: isMobile ? '12px' : '14px'
           }}
         >
           Cubo
@@ -89,7 +136,8 @@ export default function GuitarPick3D() {
             border: 'none',
             borderRadius: '4px',
             color: 'white',
-            cursor: 'pointer'
+            cursor: 'pointer',
+            fontSize: isMobile ? '12px' : '14px'
           }}
         >
           Pato
@@ -102,7 +150,8 @@ export default function GuitarPick3D() {
             border: 'none',
             borderRadius: '4px',
             color: 'white',
-            cursor: 'pointer'
+            cursor: 'pointer',
+            fontSize: isMobile ? '12px' : '14px'
           }}
         >
           Púa
@@ -110,27 +159,34 @@ export default function GuitarPick3D() {
       </div>
 
       <Canvas
-        camera={{ position: [0, 0, 5], fov: 45 }}
-        gl={{ 
-          antialias: true,
-          alpha: false
-        }}
+        camera={canvasConfig.camera}
+        gl={canvasConfig.gl}
+        dpr={[1, 2]}
+        performance={{ min: 0.5 }}
       >
-        <ambientLight intensity={1} />
+        <ambientLight intensity={isMobile ? 0.8 : 1} />
         
         {currentModel === 'box' ? (
           <Box />
         ) : (
           <Suspense fallback={null}>
-            <Model modelPath={currentModel === 'duck' ? '/3dObjects/Basement/Duck.glb' : '/3dObjects/PuaSM3D.glb'} />
+            <Model 
+              modelPath={currentModel === 'duck' ? '/3dObjects/Basement/Duck.glb' : '/3dObjects/PuaSM3D.glb'} 
+              isMobile={isMobile}
+            />
           </Suspense>
         )}
         
         <OrbitControls 
           enableDamping
           dampingFactor={0.05}
-          minDistance={1}
-          maxDistance={10}
+          minDistance={isMobile ? 2 : 1}
+          maxDistance={isMobile ? 15 : 10}
+          enableZoom={!isMobile}
+          enablePan={!isMobile}
+          enableRotate={true}
+          autoRotate={isMobile}
+          autoRotateSpeed={isMobile ? 0.5 : 0}
         />
       </Canvas>
     </div>

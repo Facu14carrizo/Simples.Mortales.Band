@@ -13,11 +13,11 @@ const Hero: React.FC = () => {
       id="home" 
       className="h-screen relative flex items-center justify-center bg-gradient-to-b from-black via-gray-900 to-black overflow-hidden"
     >
-      {/* Background texture */}
-      <div className="absolute inset-0 bg-[url('https://cdn.wallpapersafari.com/2/15/bpKVyB.jpg')] bg-cover bg-center opacity-100 mix-blend-overlay"></div>
+      {/* Background optimizado con CSS gradients en lugar de imágenes externas */}
+      <div className="absolute inset-0 bg-gradient-radial from-red-900/20 via-transparent to-black opacity-60"></div>
       
-      {/* Animated noise overlay */}
-      <div className="absolute inset-0 bg-[url('https://cdn.wallpapersafari.com/2/15/bpKVyB.jpg')] bg-cover opacity-80 mix-blend-overlay"></div>
+      {/* Animated noise overlay optimizado */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-800/30 via-transparent to-black/50 opacity-40"></div>
       
       <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
         <h1 

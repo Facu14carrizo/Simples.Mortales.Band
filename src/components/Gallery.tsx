@@ -1,39 +1,51 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const galleryImages = [
   {
     id: 1,
-    src: 'src/resources/imgs/gallery/1.jpeg',
+    src: '/src/resources/imgs/gallery/1.jpeg',
     alt: 'Live concert performance'
   },
   {
     id: 2,
-    src: 'src/resources/imgs/gallery/3.jpeg',
+    src: '/src/resources/imgs/gallery/3.jpeg',
     alt: 'Band performing on stage'
   },
   {
     id: 3,
-    src: 'src/resources/imgs/gallery/4.jpeg',
+    src: '/src/resources/imgs/gallery/4.jpeg',
     alt: 'Drummer in action'
   },
   {
     id: 4,
-    src: 'src/resources/imgs/gallery/5.jpeg',
+    src: '/src/resources/imgs/gallery/5.jpeg',
     alt: 'Concert atmosphere'
   },
   {
     id: 5,
-    src: 'src/resources/imgs/gallery/6.jpeg',
+    src: '/src/resources/imgs/gallery/6.jpeg',
     alt: 'Crowd at a rock concert'
   },
   {
     id: 6,
-    src: 'src/resources/imgs/gallery/7.jpeg',
+    src: '/src/resources/imgs/gallery/7.jpeg',
     alt: 'Heavy is the crown'
   }
 ];
+
+// Hook para throttling
+const useThrottle = (callback: Function, delay: number) => {
+  const lastRun = useRef(Date.now());
+
+  return useCallback((...args: any[]) => {
+    if (Date.now() - lastRun.current >= delay) {
+      callback(...args);
+      lastRun.current = Date.now();
+    }
+  }, [callback, delay]);
+};
 
 const Gallery: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -41,8 +53,14 @@ const Gallery: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [touchStart, setTouchStart] = useState({ x: 0, y: 0 });
-  const [touchMove, setTouchMove] = useState({ x: 0, y: 0 });
+
+  // Throttled mouse move handler
+  const throttledMouseMove = useThrottle((e: MouseEvent) => {
+    setMousePosition({
+      x: e.clientX / window.innerWidth,
+      y: e.clientY / window.innerHeight
+    });
+  }, 16); // ~60fps
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -59,42 +77,23 @@ const Gallery: React.FC = () => {
       observer.observe(sectionRef.current);
     }
 
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: e.clientX / window.innerWidth,
-        y: e.clientY / window.innerHeight
-      });
-    };
+    // Solo agregar event listeners si la sección es visible
+    if (isVisible) {
+      window.addEventListener('mousemove', throttledMouseMove, { passive: true });
 
-    const handleTouchStart = (e: TouchEvent) => {
-      setTouchStart({
-        x: e.touches[0].clientX,
-        y: e.touches[0].clientY
-      });
-    };
-
-    const handleTouchMove = (e: TouchEvent) => {
-      setTouchMove({
-        x: e.touches[0].clientX,
-        y: e.touches[0].clientY
-      });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('touchstart', handleTouchStart);
-    window.addEventListener('touchmove', handleTouchMove);
+      return () => {
+        window.removeEventListener('mousemove', throttledMouseMove);
+      };
+    }
 
     return () => {
       if (sectionRef.current) {
         observer.unobserve(sectionRef.current);
       }
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchmove', handleTouchMove);
     };
-  }, []);
+  }, [isVisible, throttledMouseMove]);
 
-  const scroll = (direction: 'left' | 'right') => {
+  const scroll = useCallback((direction: 'left' | 'right') => {
     if (scrollRef.current) {
       const { scrollLeft, clientWidth } = scrollRef.current;
       const scrollTo = direction === 'left' 
@@ -106,27 +105,27 @@ const Gallery: React.FC = () => {
         behavior: 'smooth'
       });
     }
-  };
+  }, []);
 
-  const handleImageClick = (id: number) => {
+  const handleImageClick = useCallback((id: number) => {
     setSelectedImage(id);
-  };
+  }, []);
 
-  const closeFullscreen = () => {
+  const closeFullscreen = useCallback(() => {
     setSelectedImage(null);
-  };
+  }, []);
 
-  const getParallaxStyle = () => {
+  const getParallaxStyle = useCallback(() => {
     if (selectedImage) {
-      const x = (mousePosition.x - 0.5) * 40;
-      const y = (mousePosition.y - 0.5) * 40;
+      const x = (mousePosition.x - 0.5) * 20; // Reducido de 40 a 20 para mejor rendimiento
+      const y = (mousePosition.y - 0.5) * 20;
       return {
         transform: `translate(${x}px, ${y}px)`,
         transition: 'transform 0.1s ease-out'
       };
     }
     return {};
-  };
+  }, [selectedImage, mousePosition]);
 
   return (
     <section 
@@ -134,13 +133,15 @@ const Gallery: React.FC = () => {
       ref={sectionRef}
       className="py-24 bg-zinc-900 relative overflow-hidden"
     >
-      {/* Dynamic background gradient */}
-      <div 
-        className="absolute inset-0 opacity-20 transition-opacity duration-500"
-        style={{
-          background: `radial-gradient(circle at ${mousePosition.x * 100}% ${mousePosition.y * 100}%, rgba(220, 38, 38, 0.3), transparent 70%)`
-        }}
-      />
+      {/* Dynamic background gradient - solo renderizar si es visible */}
+      {isVisible && (
+        <div 
+          className="absolute inset-0 opacity-20 transition-opacity duration-500"
+          style={{
+            background: `radial-gradient(circle at ${mousePosition.x * 100}% ${mousePosition.y * 100}%, rgba(220, 38, 38, 0.3), transparent 70%)`
+          }}
+        />
+      )}
 
       {/* Fullscreen Image View with Parallax */}
       {selectedImage && (
@@ -156,6 +157,7 @@ const Gallery: React.FC = () => {
               src={galleryImages.find(img => img.id === selectedImage)?.src}
               alt={galleryImages.find(img => img.id === selectedImage)?.alt}
               className="max-w-full max-h-[90vh] w-auto h-auto object-contain"
+              loading="eager"
             />
             <button 
               onClick={(e) => {
@@ -236,7 +238,7 @@ const Gallery: React.FC = () => {
                 className="flex-shrink-0 w-[300px] md:w-[400px] cursor-pointer overflow-hidden rounded-lg shadow-2xl"
                 style={{ 
                   transitionDelay: `${index * 100}ms`,
-                  transform: `translateY(${mousePosition.y * 20 - 10}px)`
+                  transform: isVisible ? `translateY(${mousePosition.y * 10 - 5}px)` : 'translateY(0)'
                 }}
                 onClick={() => handleImageClick(image.id)}
               >
@@ -245,6 +247,7 @@ const Gallery: React.FC = () => {
                     src={image.src} 
                     alt={image.alt}
                     className="w-full h-auto object-contain"
+                    loading="lazy"
                   />
                 </div>
               </div>

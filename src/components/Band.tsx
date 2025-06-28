@@ -4,25 +4,25 @@ const bandMembers = [
   {
     name: 'Gabo',
     role: 'Vocals',
-    image: 'src/resources/imgs/gabo.jpg',
+    image: '/src/resources/imgs/gabo.jpg',
     bio: 'Canalizando la emoción cruda y el rango dinámico de Chino Moreno con su propio estilo e intensidad únicos.'
   },
   {
     name: 'Agustin',
     role: 'Guitar I',
-    image: 'src/resources/imgs/agus.jpg',
+    image: '/src/resources/imgs/agus.jpg',
     bio: 'Creando paisajes sonoros texturizados y riffs pesados ​​que forman la columna vertebral de nuestro sonido.'
   },
   {
     name: 'Ivan',
     role: 'Drums',
-    image: 'src/resources/imgs/ivan.jpg',
+    image: '/src/resources/imgs/ivan.jpg',
     bio: 'Detrás del beat, que ofrece los ritmos complejos y atronadores que definen nuestras actuaciones dinámicas.'
   },
   {
     name: 'Facu',
     role: 'Bass',
-    image: 'src/resources/imgs/facu.jpg',
+    image: '/src/resources/imgs/facu.jpg',
     bio: 'Proporciona los graves profundos y resonantes que impulsan nuestro sonido con precisión y potencia.'
   }
 ];
@@ -31,8 +31,38 @@ const bandMembers = [
 const featured = {
   name: 'Marto',
   role: 'Guitar II',
-  image: 'src/resources/imgs/marto.jpg',
+  image: '/src/resources/imgs/marto.jpg',
   bio: 'Dando forma a las texturas en capas y riffs poderosos que agregan profundidad e intensidad a nuestro sonido característico.'
+};
+
+// Componente de imagen optimizada
+const OptimizedImage: React.FC<{ src: string; alt: string; className: string }> = ({ src, alt, className }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [error, setError] = useState(false);
+
+  if (error) {
+    return (
+      <div className={`${className} bg-gray-800 flex items-center justify-center`}>
+        <span className="text-gray-400 text-sm">Error al cargar imagen</span>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      {!isLoaded && (
+        <div className={`${className} bg-gray-800 animate-pulse`} />
+      )}
+      <img 
+        src={src} 
+        alt={alt} 
+        className={`${className} ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        onLoad={() => setIsLoaded(true)}
+        onError={() => setError(true)}
+        loading="lazy"
+      />
+    </>
+  );
 };
 
 const Band: React.FC = () => {
@@ -85,7 +115,7 @@ const Band: React.FC = () => {
               style={{ transitionDelay: `${index * 150}ms` }}
             >
               <div className="overflow-hidden rounded-sm">
-                <img 
+                <OptimizedImage 
                   src={member.image} 
                   alt={member.name} 
                   className="w-full aspect-[3/4] object-cover transform group-hover:scale-105 transition-transform duration-500"
@@ -114,7 +144,7 @@ const Band: React.FC = () => {
             style={{ transitionDelay: '750ms' }}
           >
             <div className="overflow-hidden rounded-sm">
-              <img 
+              <OptimizedImage 
                 src={featured.image} 
                 alt={featured.name} 
                 className="w-full aspect-[3/4] object-cover transform group-hover:scale-105 transition-transform duration-500"
